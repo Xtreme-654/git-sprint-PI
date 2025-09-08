@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Mes 1</h2>
+
+    Gastos por cada maquina em uso: <br>
+    <input type="text" id="maquinario" placeholder="gasto por maquina">
+    <br><br>
+
+    Renda do mes: <br>
+    <input type="text" id="renda_mes" placeholder="insira renda total do mes">
+    <br><br>
+
+    Temperatura média: <br>
+    <input type="text" id="calor" placeholder="insira media de graus do mes">
+    <br><br>
+
+    Orçamento médio: <br>
+    <input type="text" id="orçamento" placeholder="inserir orçamento">
+    <br><br>
+
+    Funcinarios em operação: <br>
+    <input type="text" id="qtd_funcionario" placeholder="Inserir quantos funcionarios">
+    <br><br>
+
+    Tamanho de opração: <br>
+    <input type="text" id="tmn_operação" placeholder="Inserir hectares da operação">
+    <br><br>
+
+    <div id="comparativo"></div>
+
+    <div id="orçamento"></div>
+
+    <div id="estimativa"></div>
+
+    
+<!-- ORÇAMENTO 
+QTD FUNCIONARIOS
+TAMANHO DA OPERAÇÃO EM HECTARES -->
+
+<!-- COMPARATIVO
+Lucro
+FOLHA DE PAGAMENTO MENSAL 
+QTD DE HROAS TRABALALHADAS
+TEMP Media
+INVESTIMENTO MENSAL  -->
+
+
+
+
+
+
+</body>
+</html>
