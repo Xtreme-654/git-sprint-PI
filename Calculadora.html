@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="display: flex;">
+        <div>
+            <div>
+                <h2>Mes 1</h2>
+
+                Gastos por cada maquina em uso: <br>
+                <input type="number" id="input_maquinario" placeholder="gasto por maquina">
+                <br><br>
+
+                Renda do mês: <br>
+                <input type="number" id="input_renda_mes" placeholder="insira renda total do mes">
+                <br><br>
+
+                Temperatura média: <br>
+                <input type="number" id="input_calor" placeholder="insira media de graus do mes">
+                <br><br>
+
+                Orçamento médio: <br>
+                <input type="number" id="input_orcamento" placeholder="inserir orçamento">
+                <br><br>
+
+                Funcinarios em operação: <br>
+                <input type="number" id="input_qtd_funcionario" placeholder="Inserir quantos funcionarios">
+                <br><br>
+
+                Tamanho de operação: <br>
+                <input type="number" id="input_tmn_operacao" placeholder="Inserir hectares da operação">
+                <br><br>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <h2>Mes 2</h2>
+
+                Gastos por cada maquina em uso: <br>
+                <input type="number" id="input_maquinario" placeholder="gasto por maquina">
+                <br><br>
+
+                Renda do mes: <br>
+                <input type="number" id="input_renda_mes" placeholder="insira renda total do mes">
+                <br><br>
+
+                Temperatura média: <br>
+                <input type="number" id="input_calor" placeholder="insira media de graus do mes">
+                <br><br>
+
+                Orçamento médio: <br>
+                <input type="number" id="input_orcamento" placeholder="inserir orçamento">
+                <br><br>
+
+                Funcinarios em operação: <br>
+                <input type="number" id="input_qtd_funcionario" placeholder="Inserir quantos funcionarios">
+                <br><br>
+
+                Tamanho de operação: <br>
+                <input type="number" id="input_tmn_operacao" placeholder="Inserir hectares da operação">
+                <br><br>
+
+                <div id="comparativo"></div>
+
+                <div id="orçamento"></div>
+
+                <div id="estimativa"></div>
+            </div>
+        </div>
+    </div>
+
+    <button onclick="orcamento()">Calcular Orçamento</button>
+<!-- ORÇAMENTO 
+QTD FUNCIONARIOS
+TAMANHO DA OPERAÇÃO EM HECTARES -->
+
+<!-- COMPARATIVO
+Lucro
+FOLHA DE PAGAMENTO MENSAL 
+QTD DE HROAS TRABALALHADAS
+TEMP Media
+INVESTIMENTO MENSAL  -->
+
+</body>
+</html>
+<script>
+
+        function orcamento(){
+
+        var maquinario = Number(input_maquinario.value);
+        var renda_mes = Number(input_renda_mes.value);
+        var calor = Number(input_calor.value);
+        var orcamento = Number(input_orcamento.value);
+        var qtd_funcionario = Number(input_qtd_funcionario.value);
+        var tmn_operacao = Number(input_tmn_operacao.value);
+
+            alert(maquinario);
+            alert(renda_mes);
+            alert(calor);
+            alert(orcamento);
+            alert(qtd_funcionario);
+            alert(tmn_operacao);
+
+
+        }
+
+</script>
