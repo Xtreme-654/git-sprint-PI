@@ -38,6 +38,8 @@
         </div>
 
         <div>
+            <!-- retirar esse bloco do html e inserir ele no script como um innerHTML do botão , mostrando os dados 
+                 após a coelta deles e o tratamento da simulação -->
             <div>
                 <h2>Mes 2</h2>
 
@@ -60,7 +62,7 @@
                 Funcinarios em operação: <br>
                 <input type="number" id="input_qtd_funcionario2" placeholder="Inserir quantos funcionarios">
                 <br><br>
-
+<!-- N-->
                 Tamanho de operação: <br>
                 <input type="number" id="input_tmn_operacao2" placeholder="Inserir hectares da operação">
                 <br><br>
@@ -90,9 +92,10 @@ INVESTIMENTO MENSAL  -->
 </html>
 <script>
 
-    var sensor = 140
+    var valor_sensor = 140
 
         function orcamento(){
+
 
         var maquinario = Number(input_maquinario.value);
         var renda_mes = Number(input_renda_mes.value);
@@ -101,7 +104,20 @@ INVESTIMENTO MENSAL  -->
         var qtd_funcionario = Number(input_qtd_funcionario.value);
         var tmn_operacao = Number(input_tmn_operacao.value);
         
-        orcamento.innerHTML = ``
+        //não há necessidade de redeclarar o tamanho da operação
+        var maquinario2 = Number(input_maquinario2.value);
+        var renda_mes2 = Number(input_renda_mes2.value);
+        var calor2 = Number(input_calor2.value);
+        var orcamento2 = Number(input_orcamento2.value);
+        var qtd_funcionario2 = Number(input_qtd_funcionario2.value);
+
+        var qnt_sensor = (tmn_operacao / 200);
+        // o valor que o investidor terá de pagar pelos sensores no total.
+        var investimento = qnt_sensor * valor_sensor;
+        
+        comparativo.innerHTML = ``;
+        orçamento.innerHTML = ``;
+        estimativa.innerHTML = ``;
     
 
 
