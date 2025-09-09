@@ -34,68 +34,41 @@
                 Tamanho de operação: <br>
                 <input type="number" id="input_tmn_operacao" placeholder="Inserir hectares da operação">
                 <br><br>
+
+                    <select id="moeda">
+                        <option value="EU">Euro</option>
+                        <option value="US">Dólar</option>
+                        <option value="BRL">Real</option>
+                    </select><br><br>
             </div>
         </div>
 
-        <div>
-            <!-- retirar esse bloco do html e inserir ele no script como um innerHTML do botão , mostrando os dados 
-                 após a coelta deles e o tratamento da simulação -->
-            <div>
-                <h2>Mes 2</h2>
-
-                Gastos por cada maquina em uso: <br>
-                <input type="number" id="input_maquinario2" placeholder="gasto por maquina">
-                <br><br>
-
-                Renda do mes: <br>
-                <input type="number" id="input_renda_mes2" placeholder="insira renda total do mes">
-                <br><br>
-
-                Temperatura média: <br>
-                <input type="number" id="input_calor2" placeholder="insira media de graus do mes">
-                <br><br>
-
-                Orçamento médio: <br>
-                <input type="number" id="input_orcamento2" placeholder="inserir orçamento">
-                <br><br>
-
-                Funcinarios em operação: <br>
-                <input type="number" id="input_qtd_funcionario2" placeholder="Inserir quantos funcionarios">
-                <br><br>
-<!-- N-->
-                Tamanho de operação: <br>
-                <input type="number" id="input_tmn_operacao2" placeholder="Inserir hectares da operação">
-                <br><br>
-
-                <div id="comparativo"></div>
-
-                <div id="orçamento"></div>
-
-                <div id="estimativa"></div>
-            </div>
-        </div>
+        <div id="teste"></div>
     </div>
 
     <button onclick="orcamento()">Calcular Orçamento</button>
-<!-- ORÇAMENTO 
-QTD FUNCIONARIOS
-TAMANHO DA OPERAÇÃO EM HECTARES -->
-
-<!-- COMPARATIVO
-Lucro
-FOLHA DE PAGAMENTO MENSAL 
-QTD DE HROAS TRABALALHADAS
-TEMP Media
-INVESTIMENTO MENSAL  -->
 
 </body>
 </html>
 <script>
-
+    var cotacao = 1;
+    var perda_produtividade = 0;
     var valor_sensor = 140
+    var manutencaoMaquinario = 0;
 
         function orcamento(){
 
+ if(moeda.value == 'EU'){
+            cotacao = 6.35;
+        } else {
+            if(moeda.value == 'US'){
+                cotacao = 5.43;
+            } else {
+                if(moeda.value == 'BRL'){
+                    cotacao = 1;
+                }
+            }
+        }
 
         var maquinario = Number(input_maquinario.value);
         var renda_mes = Number(input_renda_mes.value);
@@ -103,22 +76,60 @@ INVESTIMENTO MENSAL  -->
         var orcamento = Number(input_orcamento.value);
         var qtd_funcionario = Number(input_qtd_funcionario.value);
         var tmn_operacao = Number(input_tmn_operacao.value);
+
+        tmn_operacao *= 1000;
         
         //não há necessidade de redeclarar o tamanho da operação
-        var maquinario2 = Number(input_maquinario2.value);
-        var renda_mes2 = Number(input_renda_mes2.value);
-        var calor2 = Number(input_calor2.value);
-        var orcamento2 = Number(input_orcamento2.value);
-        var qtd_funcionario2 = Number(input_qtd_funcionario2.value);
+        //var maquinario2 = Number(input_maquinario2.value);
+        //var renda_mes2 = Number(input_renda_mes2.value);
+        //var calor2 = Number(input_calor2.value);
+        //var orcamento2 = Number(input_orcamento2.value);
+        //var qtd_funcionario2 = Number(input_qtd_funcionario2.value);
 
         var qnt_sensor = (tmn_operacao / 200);
+
         // o valor que o investidor terá de pagar pelos sensores no total.
         var investimento = qnt_sensor * valor_sensor;
         
-        comparativo.innerHTML = ``;
-        orçamento.innerHTML = ``;
-        estimativa.innerHTML = ``;
+            //criar mesmo logica para maquinario temp 30
+        if (calor >= 20){
+
+            perda_produtividade = (calor - 20) * 2.5;
+        }
+
+        var rendaSimulada = (renda_mes * 100) / (100 - perda_produtividade);
+
+        if(calor >= 30){
+
+            // A cada grau acima de 30 o gast com a manutenção do maquinário aumenta em 5%
+            alert(`A partir de 30°C o ambiente fica altamente desgastante para os trabalhadores e começa a desgastar mais o maquinário`)
+            
+            var manutencaoMaquinario = ((maquinario * 0.6) * 0.48 )* 0.20;
+            var  orcamentoSimulado = orcamento;
+        }
+        
+        orcamentoSimulado -= manutencaoMaquinario;
+
+
+        
+
+        //comparativo.innerHTML = ``;
+        //orçamento.innerHTML = ``;
+        //estimativa.innerHTML = ``;
     
+            teste.innerHTML = `<div>
+                <h2>Mes 2</h2>
+
+                <p>Com um investimento de ${moeda.value} ${(investimento/cotacao).toFixed(2)} , em nossos ${qnt_sensor.toFixed(0)} que você adquiriu, terá um retorno aproximado de : </p>
+
+                Consiredando que a temperatura média será de 20C°
+                <br><br>
+
+                Gastos por cada maquina em uso vai diminuir de ${moeda.value}$: ${orcamento} para ${moeda.value}$: ${orcamentoSimulado.toFixed(2)}.  <br> <br>
+
+                Renda do mês:  ${moeda.value}$\ ${rendaSimulada.toFixed(2)} <br> <br>
+                
+                Os funcionários terão uma produtividade aumentata em ${perda_produtividade.toFixed(2)}%.`
 
 
 
