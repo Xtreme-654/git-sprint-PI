@@ -7,32 +7,33 @@
 </head>
 <body>
     <div style="display: flex;">
-        <div>
+        <div style="margin-right: 50px;">
             <div>
-                <h2>Mes 1</h2>
+                <h2>Mês 1</h2>
 
                 Gastos por cada maquina em uso: <br>
-                <input type="number" id="input_maquinario" placeholder="gasto por maquina">
+                <!--Gastos da manutenção-->
+                <input type="number" id="input_maquinario" placeholder="Gasto com manutenção">
                 <br><br>
 
-                Renda do mês: <br>
-                <input type="number" id="input_renda_mes" placeholder="insira renda total do mes">
+                Renda mensal: <br>
+                <input type="number" id="input_renda_mes" placeholder="Insira renda total do mês">
                 <br><br>
 
                 Temperatura média: <br>
-                <input type="number" id="input_calor" placeholder="insira media de graus do mes">
+                <input type="number" id="input_calor" placeholder="Insira a média de graus">
                 <br><br>
 
                 Orçamento médio: <br>
-                <input type="number" id="input_orcamento" placeholder="inserir orçamento">
+                <input type="number" id="input_orcamento" placeholder="Insirir o orçamento">
                 <br><br>
 
                 Funcinarios em operação: <br>
-                <input type="number" id="input_qtd_funcionario" placeholder="Inserir quantos funcionarios">
+                <input type="number" id="input_qtd_funcionario" placeholder="Insira a quantidade funcionarios">
                 <br><br>
 
                 Tamanho de operação: <br>
-                <input type="number" id="input_tmn_operacao" placeholder="Inserir hectares da operação">
+                <input type="number" id="input_tmn_operacao" placeholder="Inserir em hectares">
                 <br><br>
 
                     <select id="moeda">
@@ -102,7 +103,7 @@
         if(calor >= 30){
 
             // A cada grau acima de 30 o gast com a manutenção do maquinário aumenta em 5%
-            alert(`A partir de 30°C o ambiente fica altamente desgastante para os trabalhadores e começa a desgastar mais o maquinário`)
+            alert(`A partir de 30°C o ambiente fica altamente desgastante para os trabalhadores e começa a afetar o maquinário`)
             
             var manutencaoMaquinario = ((maquinario * 0.6) * 0.48 )* 0.20;
             var  orcamentoSimulado = orcamento;
@@ -111,25 +112,23 @@
         orcamentoSimulado -= manutencaoMaquinario;
 
 
-        
-
         //comparativo.innerHTML = ``;
         //orçamento.innerHTML = ``;
         //estimativa.innerHTML = ``;
     
             teste.innerHTML = `<div>
-                <h2>Mes 2</h2>
+                <h2>Mês 2</h2>
 
-                <p>Com um investimento de ${moeda.value} ${(investimento/cotacao).toFixed(2)} , em nossos ${qnt_sensor.toFixed(0)} que você adquiriu, terá um retorno aproximado de : </p>
+                <p>Com um investimento de ${moeda.value} ${(investimento/cotacao).toFixed(2)} , em nossos ${qnt_sensor.toFixed(0)} sensores que você adquiriu, terá um retorno aproximado de : </p>
 
-                Consiredando que a temperatura média será de 20C°
+                <span style="opacity: 80%"> Considerando que a temperatura média será de 20C°. </span>
                 <br><br>
 
-                Gastos por cada maquina em uso vai diminuir de ${moeda.value}$: ${orcamento} para ${moeda.value}$: ${orcamentoSimulado.toFixed(2)}.  <br> <br>
+                Gastos por cada máquina em uso vai diminuir de ${moeda.value}$: ${orcamento} para ${moeda.value}$: ${orcamentoSimulado.toFixed(2)}.  <br> <br>
 
                 Renda do mês:  ${moeda.value}$\ ${rendaSimulada.toFixed(2)} <br> <br>
                 
-                Os funcionários terão uma produtividade aumentata em ${perda_produtividade.toFixed(2)}%.`
+                Os funcionários terão uma produtividade aumentada em ${perda_produtividade.toFixed(2)}%.`
 
 
 
