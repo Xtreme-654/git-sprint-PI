@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador financeiro!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="div_orcamento">
+        <h1>Simulador financeiro!</h1>
+        <h3>Insira o o tamanho do ambiente:</h3>
+        <input type="text" id="input_tamanho" placeholder="Tamanho do local em m²">
+        <h3>Insira a quantidade de funcionarios:</h3>
+        <input type="text" id="input_funcionarios" placeholder="Quantidade de funcionarios">
+        <h3>Insira a duração esperada para aplicação do projeto!</h3>
+        <input type="text" id="input_duracao" placeholder="Duração em meses">
+        <h3>Insira o valor do investimento inicial:</h3>
+        <input type="text" id="input_investimento" placeholder="Valor do investimento inicial">
+
+        <div id="div_resultado_orçamento"></div>
+        <br>
+        <button onclick="calcular_orcamento()">Calcular orçamento</button>
+    </div>
+
+
+    <div id="div_comparativo">
+        <div id="div_compa_mes1">
+           <h2>Mês referencia:</h2>
+           <h3>Insira os gastos em maquinários:</h3>
+        <input type="text" id="ipt_maquinario_1" placeholder="Insira Maquinario" />
+            <h3>insira os gastos em manutenção:</h3>
+        <input type="text" id="ipt_manutencao_1" placeholder="Insira Manutenção" />
+            <h3>Insira os gastos com folha de pagamento de todos os funciionarios:</h3>
+        <input type="text" id="ipt_folhaPag_1" placeholder="Insira Folha de pagamento" />
+            <h3>Insira a quantidade de horas trabalhadas no mês:</h3>
+        <input type="text" id="ipt_horas_1" placeholder="Insira Quantidade de horas" />
+            <h3>Insira o lucro liquido obtido no mês:</h3>
+        <input type="text" id="ipt_lucro_1" placeholder="Insira Lucro do mês" />
+        <div id="div_total_um">Total: </div>
+        <br />
+        <button onclick="total_mes_1()">Calcular Total</button>     
+        </div>
+
+        <div id="div_compa_mes2">
+            <h2>Mês de comparação:</h2>
+            <h3>Insira os gastos em maquinários:</h3>
+        <input type="text" id="ipt_maquinario_2" placeholder="Insira Maquinario" />
+            <h3>insira os gastos em manutenção:</h3>
+        <input type="text" id="ipt_manutencao_2" placeholder="Insira Manutenção" />
+            <h3>Insira os gastos com folha de pagamento de todos os funciionarios:</h3>
+        <input type="text" id="ipt_folhaPag_2" placeholder="Insira Folha de pagamento" />
+            <h3>Insira a quantidade de horas trabalhadas no mês:</h3>
+        <input type="text" id="ipt_horas_2" placeholder="Insira Quantidade de horas" /> 
+            <h3>Insira o lucro liquido obtido no mês:</h3>
+        <input type="text" id="ipt_lucro_2" placeholder="Insira Lucro do mês" />
+        <div id="div_total_dois">Total: </div>
+        <br />
+        <button onclick="total_mes_2()">Calcular Total</button>
+        </div>
+
+        <div id="div_container_comparativos">os resultados mostram:</div>
+
+    </div>
+
+    <div id="div_resulados">
+       <div id="div_resultado_final"></div> <h2>Resultados:</h2> </div>   
+    </div>
+    
+</body>
+</html>
+
+<script>
+    // Variáveis globais para armazenar os valores inseridos pelo usuário
+    var G_tamanho_ambiente = 0;
+    var G_quantidade_funcionarios = 0;
+    var G_duracao_projeto = 0;
+    var G_investimento_inicial = 0;
+
+    // Função para calcular o orçamento do projeto
+    function calcular_orcamento() {
+        // Captura os valores dos inputs e converte para número
+        G_tamanho_ambiente = Number(input_tamanho.value);
+        G_quantidade_funcionarios = Number(input_funcionarios.value);
+        G_duracao_projeto = Number(input_duracao.value);
+        G_investimento_inicial = Number(input_investimento.value);
+
+        // Calcula a quantidade de arduinos necessários (1 a cada 10m²)
+        // O custo do arduino é proporcional à quantidade
+        var quantidade_ardu = G_tamanho_ambiente / 35;
+        var valor_ardu = quantidade_ardu * 120;
+
+        // O custo de treinamento depende da quantidade de funcionários
+        var custo_treinamento = G_quantidade_funcionarios * 20;
+
+        // O custo de instalação é fixo + variável por arduino
+        var instalacao = (80 * quantidade_ardu) + 250;
+
+        // O lucro dos aplicadores é fixo (exemplo: 400 * 8) sendo 8 o numero de aplicadores e 450 o valor recebido para cada um deles
+        var lucro_aplicadores = 450 * 8;
+
+        // O custo final do projeto é a soma dos custos de arduino, treinamento, instalação e lucro dos aplicadores
+        // Fórmula: custo_final = valor_ardu + custo_treinamento + instalacao + lucro_aplicadores
+        var custo_final = valor_ardu + custo_treinamento + instalacao + lucro_aplicadores;
+
+        // O custo mensal é proporcional ao número de funcionários e à duração do projeto
+        // Fórmula: custo_mensal = (G_quantidade_funcionarios * 15) * G_duracao_projeto
+        var custo_mensal = (G_quantidade_funcionarios * 15) / G_duracao_projeto;
+
+        // O custo total do projeto considera o custo final, o custo mensal e desconta o investimento inicial
+        // Fórmula: custo_projeto = custo_final + custo_mensal - G_investimento_inicial
+        var custo_projeto = custo_final - G_investimento_inicial;
+
+        // Simulação do orçamento mensal (custo total dividido pela duração)
+        var simulacao_orcamento = custo_projeto / G_duracao_projeto;
+
+        // Desconto aplicado é o custo do projeto sem o lucro dos aplicadores
+        var desconto_aplicado = custo_projeto - lucro_aplicadores;
+
+        // Validação dos campos *MENSAGEM DE ERRO DE INSERÇÃO DE VALORES*
+        if (G_tamanho_ambiente <= 0 || G_quantidade_funcionarios <= 0 || G_duracao_projeto <= 0) {
+            alert("Por favor, insira valores válidos para todos os campos.");
+        }
+
+        // Exibe os resultados considerando se há investimento inicial ou não
+        if(G_investimento_inicial > 0){
+            div_resultado_orçamento.innerHTML = `<p>O custo total do projeto no peridodo de ${G_duracao_projeto} meses</p>
+                                            sendo ao todo R$${custo_projeto - lucro_aplicadores}</p>
+                                            <p>O custo mensal do projeto será de R$${custo_mensal}</p>
+                                            <p>O custo do arduino será de R$${valor_ardu}<b>*ja incluso*</b></p>
+                                            <p>O custo do treinamento será de R$${custo_treinamento}<b>*ja incluso*</b></p>
+                                            <p>O custo da instalação será de R$${instalacao}<b>*ja incluso*</b></p>
+                                                <br>
+                                            <p>O Investimento incial ja está incluso, e graças a ele podemos obter o melhor preço.`;
+        }else{
+            div_resultado_orçamento.innerHTML = `<p>O custo total do projeto no peridodo de ${G_duracao_projeto} meses</p>
+                                            sendo ao todo R$${custo_projeto}</p>
+                                            <p>O custo mensal do projeto será de R$${custo_mensal}</p>
+                                            <p>O custo inicial do projeto será de R$${custo_final}</p>
+                                            <p>O custo do arduino será de R$${valor_ardu}<b>*ja incluso*</b></p>
+                                            <p>O custo do treinamento será de R$${custo_treinamento}<b>*ja incluso*</b></p>
+                                            <p>O custo da instalação será de R$${instalacao}<b>*ja incluso*</b></p>
+                                                <br>
+                                                <p>O investimento inicial não foi inserido, caso queira melhores valores, insira um valor no campo investimento inicial.</p>`;
+        }
+
+        // Caso o investimento inicial seja maior que o custo do projeto, mostra mensagem de desconto total
+        if(G_investimento_inicial > custo_projeto){
+            div_resultado_orçamento.innerHTML += `<p>Parabéns! Com o investimento inicial inserido, o custo do projeto foi totalmente coberto!</p>
+                                                  <p>com isso seu desconto foi de ${lucro_aplicadores}. Portanto o valor final é de ${custo_projeto - lucro_aplicadores}.`;
+        }
+
+        // Mensagens finais para o usuário
+        alert("Espero que tenha gostado da simulação, qualquer dúvida entre em contato conosco!");
+        alert("esperamo ve-los em breve!");
+    }
+
+    // Função para calcular o total do mês 1
+    function total_mes_1() {
+        // Captura os valores dos inputs do mês 1
+        var maquinario1 = Number(ipt_maquinario_1.value);
+        var manutencao1 = Number(ipt_manutencao_1.value);
+        var folhaPag1 = Number(ipt_folhaPag_1.value);
+        var qtdHoras1 = Number(ipt_horas_1.value);
+        // Soma os custos principais do mês 1
+        var somaTotal1 = maquinario1 + manutencao1 + folhaPag1;
+
+        // Exibe o resultado para o usuário
+        div_total_um.innerHTML = (`Voce gastou ao todo: ${somaTotal1} em: ${qtdHoras1} Hrs mensais trabalhadas.`);
+    }
+
+    // Função para calcular o total do mês 2
+    function total_mes_2() {
+        // Captura os valores dos inputs do mês 2
+        var maquinario2 = Number(ipt_maquinario_2.value);
+        var manutencao2 = Number(ipt_manutencao_2.value);
+        var folhaPag2 = Number(ipt_folhaPag_2.value);
+        var qtdHoras2 = Number(ipt_horas_2.value);
+        // Soma os custos principais do mês 2
+        var somaTotal2 = maquinario2 + manutencao2 + folhaPag2;
+
+        // Exibe o resultado para o usuário
+        div_total_dois.innerHTML = (`Voce gastou ao todo: ${somaTotal2} em: ${qtdHoras2} Hrs mensais trabalhadas.`);
+    }
+
+    // Função para comparar os resultados dos dois meses
+    function comparar() {
+        // Captura os valores dos inputs do mês 1
+        var maquinario1 = Number(ipt_maquinario_1.value);
+        var manutencao1 = Number(ipt_manutencao_1.value);
+        var folhaPag1 = Number(ipt_folhaPag_1.value);
+        var qtdHoras1 = Number(ipt_horas_1.value);
+        var somaTotal1 = maquinario1 + manutencao1 + folhaPag1;
+        var lucro1 = Number(ipt_lucro_1.value);
+
+        // Captura os valores dos inputs do mês 2
+        var maquinario2 = Number(ipt_maquinario_2.value);
+        var manutencao2 = Number(ipt_manutencao_2.value);
+        var folhaPag2 = Number(ipt_folhaPag_2.value);
+        var qtdHoras2 = Number(ipt_horas_2.value);
+        var somaTotal2 = maquinario2 + manutencao2 + folhaPag2;
+        var lucro2 = Number(ipt_lucro_2.value);
+
+        // Calcula a variação percentual entre os meses para cada categoria
+        var comparacaoMaquinario = ((maquinario2 - maquinario1) / maquinario1) * 100;
+        var comparacaoManutencao = ((manutencao2 - manutencao1) / manutencao1) * 100;
+        var comparacaoFolhaPag = ((folhaPag2 - folhaPag1) / folhaPag1) * 100;
+        var comparacaoHoras = ((qtdHoras2 - qtdHoras1) / qtdHoras1) * 100;
+        var comparacaoTotalGastos = ((somaTotal2 - somaTotal1) / somaTotal1) * 100;
+        var comparacaoLucro = ((lucro2 - lucro1) / lucro1) * 100;
+
+        // Exibe os resultados das comparações, destacando o lucro em verde se positivo e vermelho se negativo
+        if(comparacaoLucro > 0){
+            div_container_comparativos.innerHTML = (`<p>Maquinário: ${comparacaoMaquinario.toFixed(2)}%</p>
+                                <p>Manutenção: ${comparacaoManutencao.toFixed(2)}%</p>
+                                <p>Folha de pagamento: ${comparacaoFolhaPag.toFixed(2)}%</p>
+                                <p>Quantidade de horas: ${comparacaoHoras.toFixed(2)}%</p>
+                                <p>Total em gastos: ${comparacaoTotalGastos.toFixed(2)}%</p>
+                                <p>Lucro: <b style="color: green">${comparacaoLucro.toFixed(2)}%</b></p>`);
+        }else{
+            div_container_comparativos.innerHTML = (`<p>Maquinário: ${comparacaoMaquinario.toFixed(2)}%</p>
+                                <p>Manutenção: ${comparacaoManutencao.toFixed(2)}%</p>
+                                <p>Folha de pagamento: ${comparacaoFolhaPag.toFixed(2)}%</p>
+                                <p>Quantidade de horas: ${comparacaoHoras.toFixed(2)}%</p>
+                                <p>Total em gastos: ${comparacaoTotalGastos.toFixed(2)}%</p>
+                                <p>Lucro: <b style="color: red">${comparacaoLucro.toFixed(2)}%</b></p>`);
+        }
+    }
+</script>
+
+
